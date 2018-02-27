@@ -37,7 +37,7 @@ app.use('/subject-area', subjectAreaRoute);
 
 // define a simple route
 app.get('/', function (req, res) {
-    res.json({ "message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes." });
+    res.json({ "message": "Welcome to MEAN application" });
 });
 
 // listen for requests
