@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var morgan = require('morgan');
 
 // Configuring the database
 var dbConfig = require('./config/database.config.js');
@@ -25,6 +26,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
+
+//morgan to log in the "combined" pre-defined format
+app.use(morgan('combined'))
 
 // define a simple route
 app.get('/', function (req, res) {
