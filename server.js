@@ -18,6 +18,9 @@ mongoose.connection.once('open', function() {
     console.log("Successfully connected to the database");
 });
 
+//app initialize
+var subjectAreaRoute = require('./routes/SubjectAreaRoute');
+
 // create express app
 var app = express();
 
@@ -30,6 +33,8 @@ app.use(bodyParser.json())
 //morgan to log in the "combined" pre-defined format
 app.use(morgan('combined'))
 
+app.use('/subject-area', subjectAreaRoute);
+
 // define a simple route
 app.get('/', function (req, res) {
     res.json({ "message": "Welcome to EasyNotes application. Take notes quickly. Organize and keep track of all your notes." });
@@ -39,3 +44,5 @@ app.get('/', function (req, res) {
 app.listen(3000, function () {
     console.log("Server is listening on port 3000");
 });
+
+module.exports = app;
