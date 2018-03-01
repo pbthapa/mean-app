@@ -39,7 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   Question.associate = function(models) {
-    Question.belongsTo(models.SubjectArea);
+    Question.belongsTo(models.SubjectArea, {
+      foreignKey: "subject_id"
+    });
   };
   return Question;
 };

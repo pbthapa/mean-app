@@ -1,0 +1,23 @@
+[
+    {
+        "model": "subjectarea",
+        "data": {
+            "subject": "Rabbit MQ",
+            "active": true
+        }
+    },
+    {
+        "model": "question",
+        "data": {
+            "question": "What is Rabbit MQ?",
+            "active": true,
+            "option_a": "Message Broker",
+            "option_b": "In Memory Storage",
+            "option_c": "Relational Database",
+            "option_d": "Programming Language",
+            "correct_option": "a",
+            "level": 0,
+            "subject_id": 1
+        }
+    }
+]
