@@ -1,28 +1,12 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-
-// Configuring the database
-var dbConfig = require('./config/database.config.js');
-var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-
-mongoose.connect(dbConfig.url);
-
-mongoose.connection.on('error', function() {
-    console.log('Could not connect to the database. Exiting now...');
-    process.exit();
-});
-
-mongoose.connection.once('open', function() {
-    console.log("Successfully connected to the database");
-});
-
-//app initialize
-var subjectAreaRoute = require('./routes/SubjectAreaRoute');
+const express = require('express');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
 
 // create express app
 var app = express();
+
+//morgan to log in the "combined" pre-defined format
+app.use(logger('dev'))
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -30,15 +14,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 
-//morgan to log in the "combined" pre-defined format
-app.use(morgan('combined'))
+// Import Routes
+require('./routes/SubjectAreaRoute')(app);
 
-app.use('/subject-area', subjectAreaRoute);
-
-// define a simple route
-app.get('/', function (req, res) {
-    res.json({ "message": "Welcome to MEAN application" });
-});
+app.get('*', (req, res) => res.status(200).send({
+    "message": "Welcome to NodeJS API Services"
+}));
 
 // listen for requests
 app.listen(3000, function () {

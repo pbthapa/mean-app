@@ -1,0 +1,37 @@
+{
+  "development": {
+    "username": "pushpathapa",
+    "password": "P@ssw0rd010",
+    "database": "exam-v1.1",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": "Sequelize.Op",
+    "migrationStorage": "json",
+    "migrationStoragePath": "sequelizeMeta.json",
+    "migrationStorageTableName": "sequelize_meta",
+    "define": {
+      "underscored": true,
+      "freezeTableName": true,
+      "timestamps": false
+    },
+    "pool": {
+      "max": 5,
+      "idle": 30000,
+      "acquire": 60000
+    }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

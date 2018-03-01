@@ -1,30 +1,11 @@
-var express = require('express');
-var router = express.Router();
-var subjectAreaController = require("../controller/SubjectAreaController");
+const subjectAreaController = require('../controllers/SubjectAreaController');
 
-// Get all subject areas
-router.get('/', function (req, res) {
-    subjectAreaController.list(req, res);
-});
+module.exports = (app) => {
 
-//save subject area
-router.post('/create', function (req, res) {
-    subjectAreaController.save(req, res);
-});
-
-// Find subject area by id
-router.get('/:id', function (req, res) {
-    subjectAreaController.findById(req, res);
-});
-
-// Update subject area
-router.post('/update/:id', function (req, res) {
-    subjectAreaController.update(req, res);
-});
-
-// Delete subject area
-router.post('/remove/:id', function (req, res, next) {
-    subjectAreaController.delete(req, res);
-});
-
-module.exports = router;
+  app.get('/api/subject-area', subjectAreaController.list);
+  app.post('/api/subject-area/create', subjectAreaController.save);
+  app.post('/api/subject-area', subjectAreaController.findById);
+  app.put('/api/subject-area/:id', subjectAreaController.update);
+  app.delete('/api/subject-area/:id', subjectAreaController.remove);
+  
+};
