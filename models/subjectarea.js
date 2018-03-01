@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false
   });
   SubjectArea.associate = function(models) {
-    // associations can be defined here
+    //SubjectArea.hasMany(models.Question)
   };
   return SubjectArea;
 };
