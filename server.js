@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Import Routes
-require('./routes/SubjectAreaRoute')(app);
+require('./routes/route')(app);
 
 app.get('*', (req, res) => res.status(200).send({
     "message": "Welcome to NodeJS API Services"
