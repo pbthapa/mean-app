@@ -27,12 +27,46 @@ module.exports = {
     },
     //update subject area
     update(req, res) {
-        return SubjectArea.update(req.body)
+        return SubjectArea.update({
+            subject: req.body.subject,
+            active: req.body.active
+        }, {
+            where: {
+                id: req.body.id
+            }
+        })
             .then(data => res.status(200).send(data))
             .catch(error => res.status(400).send(error));
     },
     //remove subject area
+    //technically not removing from DB but just updating the active flag to false
     remove(req, res) {
-        console.log("Not Implemented")
+        console.log(req.body.id);
+        SubjectArea.find({
+            where: {
+                id: req.body.id
+            }
+        }).then((data) => {
+            if (data != null) {
+                data.updateAttributes({
+                    active: false
+                })
+                    .then(data => res.status(200).send(data))
+                    .catch(error => res.status(400).send(error));
+            } else {
+                res.json({ "message": "Data does not exist in the database"});
+            }
+        })
+            .catch(error => res.status(400).send(error));
+    },
+    //find all subject area with only active status
+    findAllActiveSubjectArea(req, res) {
+        return SubjectArea.findAll({
+            where: {
+                active: true
+            }
+        })
+            .then(data => res.status(200).send(data))
+            .catch(error => res.status(400).send(error));
     }
 };
