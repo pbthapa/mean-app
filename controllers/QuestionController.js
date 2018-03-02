@@ -4,7 +4,11 @@ const SubjectArea = require('../models').SubjectArea;
 module.exports = {
     // Show list of questions
     list(req, res) {
-        return Question.findAll({})
+        return Question.findAll({
+            include: [
+                { model: SubjectArea, required: true }
+            ]
+        })
             .then((data) => res.status(200).send(data))
             .catch((error) => res.status(400).send(error));
     },
@@ -60,6 +64,9 @@ module.exports = {
     //find all question with only active status
     findAllActiveQuestions(req, res) {
         return Question.findAll({
+            include: [
+                { model: SubjectArea, required: true }
+            ],
             where: {
                 active: true
             }
