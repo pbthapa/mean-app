@@ -9,8 +9,8 @@ module.exports = (app) => {
   app.get('/api/admin/all-subject-area', subjectAreaController.list);
   app.post('/api/admin/create-subject-area', subjectAreaController.save);
   app.post('/api/subject-area', subjectAreaController.findById);
-  app.put('/api/subject-area', subjectAreaController.update);
-  app.delete('/api/subject-area', subjectAreaController.remove);
+  app.put('/api/admin/update-subject-area', subjectAreaController.update);
+  app.put('/api/admin/remove-subject-area', subjectAreaController.remove);
   app.get('/api/subject-area/active', subjectAreaController.findAllActiveSubjectArea);
   app.get('/api/admin/select-subjects', subjectAreaController.findAllActiveSubjectAreaForSelectControl);
   /**
