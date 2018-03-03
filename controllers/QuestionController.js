@@ -73,5 +73,29 @@ module.exports = {
         })
             .then(data => res.status(200).send(data))
             .catch(error => res.status(400).send(error));
+    },
+    findBySubjectId(req, res) {
+        return Question.findAll({
+            where: {
+                subject_id: req.body.subjectId,
+                active: true
+            }
+        })
+            .then(data => res.status(200).send(data))
+            .catch(error => res.status(400).send(error));
+    },
+    findBySearchCriteria(req, res) {
+        return Question.findAll({
+            include: [
+                { model: SubjectArea, required: true }
+            ],
+            where: {
+                subject_id: req.body.subjectIds,
+                level: req.body.levels,
+                active: true
+            }
+        })
+            .then(data => res.status(200).send(data))
+            .catch(error => res.status(400).send(error));
     }
 };
