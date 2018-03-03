@@ -1,5 +1,6 @@
 const subjectAreaController = require('../controllers/SubjectAreaController');
 const questionController = require('../controllers/QuestionController');
+const questionSetController = require('../controllers/QuestionSetController');
 
 module.exports = (app) => {
 
@@ -30,5 +31,14 @@ module.exports = (app) => {
   app.post('/api/admin/questions-per-criteria', questionController.findBySearchCriteria);
   /**
    * END: Question Routes
+  **/
+
+  /**
+   * START: Question Set Routes
+  **/
+  app.get('/api/admin/list-question-set', questionSetController.list);
+  app.post('/api/admin/create-question-set', questionSetController.save);
+  /**
+   * END: Question Set Routes
   **/
 };
