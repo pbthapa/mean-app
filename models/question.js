@@ -42,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
     Question.belongsTo(models.SubjectArea, {
       foreignKey: "subject_id"
     });
+    Question.belongsToMany(models.QuestionSetDetail, {
+      as: 'questionSetDetails',
+      through: 'question_set_detail_group', //this can be string or a model,
+      foreignKey: 'question_id'
+    });
   };
   return Question;
 };

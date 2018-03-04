@@ -31,14 +31,6 @@ module.exports = {
       updated_at: {
         allowNull: true,
         type: Sequelize.DATE
-      },
-      question_id: {
-        type: Sequelize.BIGINT,
-        allowNull: false,
-        references: {
-          model: "question",
-          key: "id"
-        }
       }
     });
   },
