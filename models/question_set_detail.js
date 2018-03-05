@@ -3,7 +3,8 @@ module.exports = (sequelize, DataTypes) => {
   var QuestionSetDetail = sequelize.define('QuestionSetDetail', {
     question_set_name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     total_time: {
       type: DataTypes.INTEGER,
@@ -16,11 +17,15 @@ module.exports = (sequelize, DataTypes) => {
     active: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    active_on: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     underscored: true,
     tableName: "question_set_detail",
-    timestamps: false
+    timestamps: true
   });
   QuestionSetDetail.associate = function(models) {
     QuestionSetDetail.belongsToMany(models.Question, {

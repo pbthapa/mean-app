@@ -4,7 +4,9 @@ const Question = require('../models').Question;
 module.exports = {
     // Show list of question set
     list(req, res) {
-
+        return QuestionSetDetail.findAll({})
+            .then(data => res.status(200).send(data))
+            .catch(error => res.status(400).send({ "error_message": "Unable to find the list" }));
     },
     // Save question set
     save(req, res) {
