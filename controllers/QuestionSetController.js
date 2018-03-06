@@ -28,5 +28,23 @@ module.exports = {
             .catch(error => {
                 res.status(400).send({ "error_message": "Unable to save record" });
             });
+    },
+    findSetDetailsById(req, res) {
+        console.log(req.body.id);
+        return QuestionSetDetail.find({
+            where: {
+                id: req.body.id
+            }
+        })
+        .then(result => {
+            return result.getQuestions()
+                .then(data => {res.status(200).send(data); console.log(data)})
+                .catch(error => {
+                    res.status(400).send({ "error_message": "Unable to save record" });
+                })
+        })
+        .catch(error => {
+            res.status(400).send({ "error_message": "Unable to save record" });
+        });
     }
 };
