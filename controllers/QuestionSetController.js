@@ -31,14 +31,19 @@ module.exports = {
     },
     findSetDetailsById(req, res) {
         console.log(req.body.id);
+        data = [];
         return QuestionSetDetail.find({
             where: {
                 id: req.body.id
             }
         })
-        .then(result => {
-            return result.getQuestions()
-                .then(data => {res.status(200).send(data); console.log(data)})
+        .then(detail => {
+            data.push(detail);
+            return detail.getQuestions()
+                .then(questions => {
+                    data.push(questions);
+                    res.status(200).send(data);
+                })
                 .catch(error => {
                     res.status(400).send({ "error_message": "Unable to save record" });
                 })
