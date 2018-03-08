@@ -23,7 +23,7 @@ module.exports = (app) => {
   **/
   app.get('/api/admin/questions', questionController.list);
   app.post('/api/admin/create-question', questionController.save);
-  app.post('/api/question', questionController.findById);
+  app.post('/api/admin/question', questionController.findById);
   app.put('/api/question', questionController.update);
   app.delete('/api/question', questionController.remove);
   app.get('/api/questions/active', questionController.findAllActiveQuestions);
