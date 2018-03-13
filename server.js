@@ -26,4 +26,31 @@ app.listen(3000, function () {
     console.log("Server is listening on port 3000");
 });
 
+var q = 'TestQueue';
+
+var open = require('amqplib').connect('amqp://localhost');
+
+// Publisher
+open.then(function (conn) {
+    return conn.createChannel();
+}).then(function (ch) {
+    return ch.assertQueue(q).then(function (ok) {
+        return ch.sendToQueue(q, new Buffer(JSON.stringify({ id: "102", name: "Donkey", age: 20 })));
+    });
+}).catch(console.warn);
+
+// Consumer npm install amqplib -g
+open.then(function (conn) {
+    return conn.createChannel();
+}).then(function (ch) {
+    return ch.assertQueue(q).then(function (ok) {
+        return ch.consume(q, function (msg) {
+            if (msg !== null) {
+                console.log("LOG------" + msg.content.toString());
+                ch.ack(msg);
+            }
+        });
+    });
+}).catch(console.warn);
+
 module.exports = app;
