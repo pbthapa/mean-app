@@ -39,6 +39,7 @@ module.exports = (app) => {
   app.get('/api/admin/list-question-set', questionSetController.list);
   app.post('/api/admin/create-question-set', questionSetController.save);
   app.post('/api/admin/edit-question-set', questionSetController.findSetDetailsById);
+  app.post('/api/admin/update-question-set', questionSetController.updateQuestionSet);
   /**
    * END: Question Set Routes
   **/
