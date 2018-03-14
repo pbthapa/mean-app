@@ -1,6 +1,6 @@
 {
   "development": {
-    "username": "pushpathapa",
+    "username": "postgres",
     "password": "P@ssw0rd010",
     "database": "exam-v1.1",
     "host": "127.0.0.1",
