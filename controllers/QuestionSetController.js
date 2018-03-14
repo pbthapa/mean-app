@@ -14,7 +14,8 @@ module.exports = {
             question_set_name: req.body.question_set_name,
             total_mark: req.body.total_mark,
             total_time: req.body.total_time,
-            active: req.body.active,
+            active: (req.body.active == null ? false: req.body.active),
+            active_on: req.body.active_on,
             created_at: new Date(),
             updated_at: new Date()
         })
