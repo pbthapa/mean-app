@@ -54,19 +54,29 @@ module.exports = {
                 res.status(400).send({ "error_message": "Unable to save record" });
             });
     }, updateQuestionSet(req, res) {
-        console.log(req.body);
-        ids = [];
-        ids.push(1);
-        ids.push(2);
-        db.sequelize.query("Select update_question_set("
-        + req.body.id + ", '"
-        + req.body.question_set_name + "', "
-        + req.body.total_time + ", "
-        + req.body.total_mark + ", "
-        + req.body.active + ", '"
-        + req.body.active_on + "', ARRAY["
-        + ids + "])", { raw: true })
-            .then(response => res.json(response))
-            .error(err => console.log(err));
+        const sql = "Select update_question_set("
+                        + req.body.id + ", '"
+                        + req.body.question_set_name + "', "
+                        + req.body.total_time + ", "
+                        + req.body.total_mark + ", "
+                        + req.body.active + ", '"
+                        + req.body.active_on + "', ARRAY["
+                        + req.body.selectedQuestionIds + "])";
+        db.sequelize.query(sql, { raw: true })
+            .then(response => res.status(200).send(response))
+            .catch(error => res.status(400).send({ "error_message": "Unable to update record" }));
+    }, removeQuestionSet (req, res) {
+        return QuestionSetDetail.destroy({
+            where: {
+                id: req.body.id
+            }
+        })
+            .then(response => {
+                const sql = "DELETE FROM question_set_detail_group where set_detail_id = " + req.body.id;
+                db.sequelize.query(sql, { raw: true })
+                    .then(result => res.status(200).send(result))
+                    .catch(error => res.status(400).send({ "error_message": "Unable to delete record" }))
+            })
+            .catch(error => res.status(400).send({ "error_message": "Unable to delete record" }));
     }
 };
