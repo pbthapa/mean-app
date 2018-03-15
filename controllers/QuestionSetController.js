@@ -1,6 +1,6 @@
 const QuestionSetDetail = require('../models').QuestionSetDetail;
 const Question = require('../models').Question;
-const { db } = require('../models/index');
+var db = require('../models');
 
 module.exports = {
     // Show list of question set
@@ -63,7 +63,10 @@ module.exports = {
                         + req.body.active_on + "', ARRAY["
                         + req.body.selectedQuestionIds + "])";
         db.sequelize.query(sql, { raw: true })
-            .then(response => res.status(200).send(response))
+            .then(data => {
+                console.log(data);
+                res.status(200).send({ "success_message": "success" });
+            })
             .catch(error => res.status(400).send({ "error_message": "Unable to update record" }));
     }, removeQuestionSet (req, res) {
         return QuestionSetDetail.destroy({
