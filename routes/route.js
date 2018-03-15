@@ -14,6 +14,7 @@ module.exports = (app) => {
   app.put('/api/admin/remove-subject-area', subjectAreaController.remove);
   app.get('/api/subject-area/active', subjectAreaController.findAllActiveSubjectArea);
   app.get('/api/admin/select-subjects', subjectAreaController.findAllActiveSubjectAreaForSelectControl);
+  app.post('/api/admin/list-subject-area', subjectAreaController.findPagedSubjectAreaList);
   /**
    * END: Subject Area Routes
   **/

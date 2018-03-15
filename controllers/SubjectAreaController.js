@@ -34,10 +34,10 @@ module.exports = {
             subject: req.body.subject,
             active: req.body.active
         }, {
-            where: {
-                id: req.body.id
-            }
-        })
+                where: {
+                    id: req.body.id
+                }
+            })
             .then(data => res.status(200).send(data))
             .catch(error => res.status(400).send(error));
     },
@@ -57,7 +57,7 @@ module.exports = {
                     .then(data => res.status(200).send(data))
                     .catch(error => res.status(400).send(error));
             } else {
-                res.json({ "message": "Data does not exist in the database"});
+                res.json({ "message": "Data does not exist in the database" });
             }
         })
             .catch(error => res.status(400).send(error));
@@ -81,5 +81,22 @@ module.exports = {
         })
             .then(data => res.status(200).send(data))
             .catch(error => res.status(400).send(error));
+    },
+    findPagedSubjectAreaList(req, res) {
+        let page = req.body.page;
+        let limit = req.body.limit;
+        let offset = limit * (page - 1);
+        return SubjectArea.findAndCountAll({
+            limit: limit,
+            offset: offset,
+            $sort: { id: 1 }
+        })
+            .then((data) => {
+                let pages = Math.ceil(data.count / limit);
+                res.status(200).json({ 'result': data.rows, 'count': data.count, 'pages': pages });
+            })
+            .catch(function (error) {
+                res.status(400).send({ 'error_message': 'Internal Server Error' });
+            });
     }
 };
