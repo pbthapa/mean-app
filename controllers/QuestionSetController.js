@@ -81,5 +81,22 @@ module.exports = {
                     .catch(error => res.status(400).send({ "error_message": "Unable to delete record" }))
             })
             .catch(error => res.status(400).send({ "error_message": "Unable to delete record" }));
+    }, findPagedQuestionSetList(req, res) {
+        console.log(req.body);
+        let page = req.body.page;
+        let limit = req.body.limit;
+        let offset = limit * (page - 1);
+        return QuestionSetDetail.findAndCountAll({
+            limit: limit,
+            offset: offset,
+            $sort: { id: 1 }
+        })
+            .then((data) => {
+                let pages = Math.ceil(data.count / limit);
+                res.status(200).json({ 'result': data.rows, 'count': data.count, 'pages': pages });
+            })
+            .catch(function (error) {
+                res.status(400).send({ 'error_message': 'Internal Server Error' });
+            }); 
     }
 };

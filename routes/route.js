@@ -37,11 +37,12 @@ module.exports = (app) => {
   /**
    * START: Question Set Routes
   **/
-  app.get('/api/admin/list-question-set', questionSetController.list);
+  app.get('/api/admin/all-question-set', questionSetController.list);
   app.post('/api/admin/create-question-set', questionSetController.save);
   app.post('/api/admin/edit-question-set', questionSetController.findSetDetailsById);
   app.post('/api/admin/update-question-set', questionSetController.updateQuestionSet);
   app.post('/api/admin/remove-question-set', questionSetController.removeQuestionSet);
+  app.post('/api/admin/list-question-set', questionSetController.findPagedQuestionSetList);
   /**
    * END: Question Set Routes
   **/
