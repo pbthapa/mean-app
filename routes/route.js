@@ -1,6 +1,7 @@
 const subjectAreaController = require('../controllers/SubjectAreaController');
 const questionController = require('../controllers/QuestionController');
 const questionSetController = require('../controllers/QuestionSetController');
+const examController = require('../controllers/ExamController');
 
 module.exports = (app) => {
 
@@ -46,4 +47,13 @@ module.exports = (app) => {
   /**
    * END: Question Set Routes
   **/
+
+  /**
+   * START: Exam
+   **/
+  app.post('/api/admin/start-exam', examController.startExam);
+  /**
+   * END: Exam
+   **/
+  
 };
