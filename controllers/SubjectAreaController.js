@@ -83,6 +83,7 @@ module.exports = {
             .catch(error => res.status(400).send(error));
     },
     findPagedSubjectAreaList(req, res) {
+        console.log(res.body);
         let page = req.body.page;
         let limit = req.body.limit;
         let offset = limit * (page - 1);
